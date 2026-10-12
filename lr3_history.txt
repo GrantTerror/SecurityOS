@@ -1,0 +1,130 @@
+    1  mkdir -p ~/test && cd test
+    2  touch file
+    3  ls -l file
+    4  chmod 000 file
+    5  echo "smth" > file
+    6  cat file
+    7  chmod 200 file
+    8  echo "smth" > file
+    9  cat file
+   10  chmod g+r file
+   11  ls -l file
+   12  cat file
+   13  chmod u+r file
+   14  cat file
+   15  mkdir dir
+   16  cd dir
+   17  touch new_file
+   18  echo "Nothing" > new_file 
+   19  ls -la dir
+   20  cd ..
+   21  ls -la dir
+   22  chmod a-x dir
+   23  cat dir/new_file 
+   24  rm dir/new_file 
+   25  chmod u+x dir
+   26  chown root file
+   27  umask 077
+   28  touch test_file
+   29  ls -l test_file 
+   30  umask 022
+   31  umask 000
+   32  touch public
+   33  file -l public 
+   34  ls -l public 
+   35  umask 022
+   36  ls -l file
+   37  cat file
+   38  chmod 440 file
+   39  cat file
+   40  clear
+   41  whoami
+   42  id
+   43  id -u
+   44  id -g
+   45  groups
+   46  getent passwd "$USER"
+   47  getent group "$(id -gn)"
+   48  sudo groupadd labgroup
+   49  groups
+   50  logout
+   51  exit
+   52  script -a ~/lab3_session.log
+   53  exit
+   54  sudo gpasswd -d testuser testadmins
+   55  sudo cp /etc/login.defs /etc/login.defs.bak
+   56  grep -E 'UID|GID|CREATE_HOME|UMASK|HOME_MODE|USERGROUPS_ENAB|SHELL' /etc/login.defs
+   57  sudo sed -i 's/^UID_MIN.*/UID_MIN 5000/' /etc/login.defs
+   58  sudo useradd -m configuser1
+   59  id configuser1 
+   60  sudo userdel -m configuser1 
+   61  sudo userdel -r configuser1 
+   62  id configuser
+   63  sudo cp /etc/login.defs.bak /etc/login.defs
+   64  sudo sed -i 's/^SYS_UID_MIN.*/SYS_UID_MIN 500/' /etc/login.defs
+   65  sudo sed -i 's/^SYS_UID_MAX.*/SYS_UID_MAX 600/' /etc/login.defs
+   66  sudo useradd -r sysconfig1
+   67  sudo useradd -r sysconfig2
+   68  sudo useradd -r sysconfig3
+   69  if sysconfig1 sysconfig2 sysconfig3
+   70  id sysconfig1 sysconfig2 sysconfig3
+   71  ls
+   72  sudo userdel sysconfig1 sysconfig2 sysconfig3
+   73  sudo userdel sysconfig1
+   74  sudo userdel sysconfig2
+   75  sudo userdel sysconfig3
+   76  sudo cp /etc/login.defs.bak /etc/login.defs
+   77  sudo -i 's/^GID_MIN.*/GID_MIN 5000/' /etc/login.defs
+   78  sudo -i 's/^SYS_GID_MIN.*/SYS_GID_MIN 500/' /etc/login.defs
+   79  sudo -i 's/^#SYS_GID_MIN.*/#SYS_GID_MIN 500/' /etc/login.defs
+   80  clear
+   81  sudo sed -i 's/^SYS_GID_MAX.*/SYS_GID_MAX 600/' /etc/login.defs
+   82  sudo sed -i 's/^SYS_GID_MIN.*/SYS_GID_MIN 500/' /etc/login.defs
+   83  sudo groupadd -r sysconfiggroup1
+   84  sudo groupadd -r sysconfiggroup2
+   85  getent group susconfiggroup1
+   86  getent group sysconfiggroup1
+   87* getent group sysconfiggroup2c
+   88  sudo groupdel sysconfiggroup1
+   89  sudo groupdel sysconfiggroup2
+   90  sudo cp /etc/login.defs.bak /etc/login.defs
+   91  grep sed -i 's/^CREATE_HOME.*/CREATE_HOME yes/' /etc/login.defs
+   92  grep '^CREATE_HOME' /etc/login.defs
+   93  cat /etc/login.defs
+   94  clear
+   95  sudo sed -i 's/^CREATE_HOME.*/CREATE_HOME yes/' /etc/login.defs
+   96  sudo useradd homeuser1
+   97  ls -ld /home/homeuser1
+   98  ls -ld /home/
+   99  ls /home/
+  100  sudo userdel -r homeuser1 
+  101  sudo cp /etc/login.defs.bak /etc/login.defs
+  102  grep '^(UMASK|HOME_MODE)' /etc/login.defs
+  103  grep -E '^(UMASK|HOME_MODE)' /etc/login.defs
+  104  sudo useradd -m testmask1
+  105  stat -c '%a %n' /home/testumask1
+  106  stat -c '%a %n' /home/testmask1
+  107  sudo sed -i 's/^UMASK.*/UMASK 077/' /etc/login.defs
+  108  useradd -m testumask2
+  109  sudo useradd -m testumask2
+  110  stat -c '%a %n' /home/testumask2
+  111  sudo userdel testumask2 testmask1 
+  112  sudo userdel testumask2 
+  113  sudo userdel testmask1
+  114  grep '^USERGROUPS_ENAB' /etc/login.defs
+  115  sudo cp /etc/login.defs.bak /etc/login.defs
+  116  sudo useradd -m uguser1
+  117  getent group uguser1 
+  118  sudo sed -i 's/^USERGROUPS_ENAB.*/USERGROUPS_ENAB no/' /etc/login.defs
+  119  sudo useradd -m uguser2
+  120  getent group uguser2
+  121  id uguser2
+  122  sudo cp /etc/login.defs.bak /etc/login.defs
+  123  clear
+  124  grep '^HOME' /etc/default/useradd 
+  125  grep '^SHELL' /etc/default/useradd 
+  126  grep '^HOME' /etc/default/useradd 
+  127  sudo sed -i 's|^SHELL=.*|SHELL=/bin/sh|' /etc/default/useradd 
+  128  sudo useradd -m defaultuser1
+  129  getent passwd defaultuser1 
+  130  history > ~/lr3_history.txt
